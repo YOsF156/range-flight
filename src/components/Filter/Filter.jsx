@@ -1,18 +1,18 @@
 import React, { useContext } from 'react'
-import { Context } from '../../App'
+import { BusContext } from '../../App'
 
 function Filter(props) {
-    console.log("🚀 ~ file: Filter.jsx:5 ~ Filter ~ props", props)
 
-    const { handleInputs, inputs } = useContext(Context)
+    const { handleInputs, inputs } = useContext(BusContext)
+
     return (
         <label>
             <span>{props.name}</span>
-            <input {...props} value={inputs[props.name] ? inputs[props.name] : props.max} onChange={handleInputs} />
-            <span className="range-tooltip">{inputs[props.name]}</span>
-
-
+            <input {...props} value={inputs[props.name]} onChange={handleInputs} />
+            <input {...props} type="number" value={inputs[props.name]} onChange={handleInputs} className="range-tooltip"></input>
         </label>
+
+
     )
 }
 

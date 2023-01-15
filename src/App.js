@@ -1,7 +1,8 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import MainLayout from "./Layout/MainLayout/MainLayout";
 
-export const Context = createContext()
+export const BusContext = createContext()
+
 const flights = [
   {
     id: 1,
@@ -47,7 +48,7 @@ const flights = [
     id: 5,
     duration: 1,
     cost: 100,
-    passengers: 1,
+    passengers: 2,
     departure: "Dallas",
     arrival: "New Orleans",
     airline: "Southwest",
@@ -153,28 +154,49 @@ const flights = [
     airline: "China Eastern",
     airlineLogo: "https://www.logo.wine/a/logo/China_Eastern_Airlines/China-Eastern-Airlines-Logo.wine.svg"
   }]
-function App() {
-  // const [FlightsList, setFlightsList] = useState(flights)
-  const [inputs, setInputs] = useState({});
 
-  const filteredFlights = useMemo(() => {
-    return flights.filter((flight) => flight.duration < inputs.duration)
-  }, [inputs])
-  console.log("🚀 ~ file: App.js:163 ~ filteredFlights ~ filteredFlights", filteredFlights)
+
+function App() {
+  const [flightsList, setFlightsList] = useState(flights)
+  const [inputs, setInputs] = useState({
+    duration: 3,
+    cost: 250,
+    passengers: 1
+  });
+  console.log("🚀 ~ file: App.js:162 ~ App ~ inputs", inputs)
+
+  // const filteredFlights = useMemo(() => {
+  //   return flights.filter(flight =>
+  //     flight.duration <= inputs.duration && flight.cost <= inputs.cost && flight.passengers >= inputs.passengers
+  //   )
+  // }, [inputs])
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setFlightsList(flights.filter(flight =>
+      flight.duration <= inputs.duration && flight.cost <= inputs.cost && flight.passengers >= inputs.passengers
+    ))
+  }
+
 
 
   const handleInputs = (e) => {
-    setInputs(prev => {
-      return { ...prev, [e.target.name]: e.target.value }
-    })
+    setInputs({ ...inputs, [e.target.name]: e.target.value })
   }
   return (
     <div className="app">
-      <Context.Provider value={{ handleInputs, inputs, filteredFlights }}>
+      <BusContext.Provider value={{
+        flightsList,
+        // filteredFlights,
+        handleSubmit, handleInputs, inputs
+      }}>
         <MainLayout />
-      </Context.Provider>
+      </BusContext.Provider>
     </div>
   );
 }
 
 export default App;
+//<Context.Provider value={{ handleInputs, inputs, filteredFlights }}>

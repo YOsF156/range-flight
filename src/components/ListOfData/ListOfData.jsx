@@ -1,15 +1,17 @@
 import React, { useContext } from 'react'
-import { Context } from '../../App'
+import { BusContext } from '../../App'
 import FlightCard from '../Flight/Flight'
 import "./ListOfData.css"
 
 
 function ListOfData() {
-    const { filteredFlights } = useContext(Context)
+    // const { filteredFlights } = useContext(BusContext)
+    const { flightsList } = useContext(BusContext)
     return (
         <div className="list">
+            <span>{flightsList.length}</span>
             {
-                filteredFlights.map(flight => <FlightCard flight={flight} />)
+                flightsList.map(flight => <FlightCard flight={flight} />)
             }
         </div>
     )
