@@ -1,0 +1,35 @@
+.filters-container {
+  width: 40%;
+  height: 20rem;
+  background-color: antiquewhite;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.range-tooltip {
+  border: 1px solid gray;
+  border-radius: 8px;
+  background-color: beige;
+  width: 3rem;
+  text-align: center;
+}
+span {
+  font-size: 1.5rem;
+}
+form button {
+  margin-left: auto;
+  margin-top: auto;
+  padding: 0.2rem;
+  background-color: rgb(7, 165, 165);
+  border-radius: 8px;
+  cursor: pointer;
+  /* width: 5rem;
+  height: 3rem; */
+  font-size: 2rem;
+}
+form button:hover {
+  background-color: rgb(104, 171, 171);
+}
